@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>Google Mapの練習</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        #map {
+            height: 100%;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="map"></div>
+
+    <script>
+        var map;
+
+        function initMap() {
+            var latlng = new google.maps.LatLng(35.66, 139.69);
+            var options = {
+                zoom: 15,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+
+            map = new google.maps.Map(document.getElementById('map'), options);
+        };
+
+
+        // ユーザーの現在地を取得して表示
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+            }, function() {
+                alert("現在地を取得できません")
+            })
+        } else {
+            alert("対応していません")
+        }
+
+
+
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?language=ja&key=AIzaSyDAT74cbx3fHQr3fr4zuWFW-pAdXKnv1YM&callback&callback=initMap"
+    async defer></script>
+    
+</body>
+</html>

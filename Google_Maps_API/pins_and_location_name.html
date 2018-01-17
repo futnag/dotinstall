@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <title>Simple Map</title>
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta charset="utf-8">
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+            #map {
+                height: 100%;
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+        <script>
+
+            // ここから
+            // var map;
+            function initMap() {
+
+                var geocoder = new google.maps.Geocoder();
+
+                geocoder.geocode({
+                    'address':'東京都千代田区'
+                }, function(result, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var latlng = result[0].geometry.location;
+                    } else {
+                        alert('エラーです')
+                    }
+
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        center: latlng,
+                        zoom: 15
+                        });
+
+                    // クリック位置にマーカーを立てる
+                    google.maps.event.addListener(map, 'click', function(event) {
+                        var marker = new google.maps.Marker({
+                            position: event.latLng,
+                            map: map,
+                            // draggable: true,
+                        });
+
+                        // マーカーを立てた位置に情報ウインドウを出す
+                        geocoder.geocode({
+                            'latLng': event.latLng
+                        }, function(result, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+                                // 情報ウインドウ作成
+                                var infoWindow = new google.maps.InfoWindow({
+                                    content: result[0].formatted_address,
+                                    // position: event.latLng
+                                });
+                                infoWindow.open(map, marker);
+
+                            } else {
+                                alert("エラー！！")
+                            }
+                        });// マーカーを立てた位置に情報ウインドウを出す
+                    });// クリック位置にマーカーを立てる
+                });// geocoder.geocode
+            };//function initMap()
+
+
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?language=ja&key=AIzaSyDAT74cbx3fHQr3fr4zuWFW-pAdXKnv1YM&callback&callback=initMap"
+        async defer></script>
+    </body>
+</html>
