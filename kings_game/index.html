@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>王様ゲーム</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>王様ゲーム</h1>
+    <div>
+        人数 : <input type="text" id="number">
+    </div>
+    <!-- <input type="button" id="btn" value="王様曰く!"> -->
+    <input type="button" id="btn" value="王様曰く!" onclick="kingSaid();">
+
+    <br>
+    <span id="result"></span>
+    <!-- <script src="main.js"></script> -->
+    <script>
+    function kingSaid() {
+
+        var number = document.getElementById("number").value;
+        var result = document.getElementById("result");
+        var action = ['にデコピンする', 'にキスをする', 'にシッペする',
+                        'にクイズを出す', 'をほめまくる', 'にお酌する'];
+        
+        var reg = number.match(/^[1-9][0-9]*$/);
+
+        if (reg === null) {
+            result.innerHTML = "数字を入力してください。";
+        } else {
+
+        var king = Math.floor(Math.random() * number) + 1;
+        var target;
+
+        if (number < 2) {
+            target = 1;
+        } else {
+            do {
+                target = Math.floor(Math.random() * number) + 1;
+            } while (king === target);
+        }
+
+        var w = Math.floor(Math.random() * action.length);
+
+        result.innerHTML = '#' + king + 'が、' + '#' + target + action[w];
+        }
+    };
+    </script>
+</body>
+</html>

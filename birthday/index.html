@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Birthday</title>
+</head>
+<body>
+    <h1>日付の計算</h1>
+    <p>誕生日: <input type="text" name="birthday" id="birthday" value="1986-03-06"></p>
+    <p><input type="button" value="計算!" onclick="getAge();"></p>
+    <p>生まれてから<span id="daysPast">????</span>
+    日経過していて、だいたい<span id="age">????</span>歳です!!</p>
+
+    <script>
+        function getAge() {
+            //入力値の取得
+            var birthday = document.getElementById("birthday").value.split("-");
+
+            //日付オブジェクトの作成
+            var d1 = new Date(birthdayarray[0], birthdayarray[1] - 1, birthdayarray[2]);
+            var d2 = new Date();
+
+            //日数、年齢計算
+            var diff = d2.getTime() - d1.getTime();
+            var daysPast = Math.floor(diff / (1000 * 60 * 60 * 24));
+            var age = Math.floor(daysPast / 365.25);
+
+            //結果の表示
+            document.getElementById('daysPast').innerHTML = daysPast;
+            document.getElementById('age').innerHTML = age;
+        }
+    </script>
+
+
+</body>
+</html>
