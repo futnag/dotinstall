@@ -1,7 +1,7 @@
 # dotinstall
 ---
 
-* birthday
+* birthday  
     JavaScriptで作る誕生日診断
     (https://dotinstall.com/lessons/date_js)
 * checker    
@@ -28,6 +28,6 @@
 * countdown  
     JavaScriptでカウントダウンタイマーを作ろう
     (https://dotinstall.com/lessons/countdown_js)
-* Google_Maps_API 
+* Google_Maps_API  
     Google Maps API入門
     (https://dotinstall.com/lessons/basic_google_maps_v2)
